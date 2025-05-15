@@ -1,0 +1,14 @@
+pandas
+numpy
+nltk
+scikit-learn
+gensim
+matplotlib
+wordcloud
+scipy
+joblib
+jinja2
+numexpr
+funcy
+pyldavis
+openpyxl
