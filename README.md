@@ -13,4 +13,6 @@ given in the block main control by the user
 The ...sub file contains only subroutines. There is nothing to do. In the file ...results are different loops for the parameters as presentd in the main control bevore. Therewith
 different methods of cleaning, dictionary construction or topic extraction can be compared to each other. 
 
-
+## Dataset
+The dataset for the analyse can be found here: 
+[Customer_complaind](https://www.kaggle.com/datasets/ashwinik/consumer-complaints-financial-products)
