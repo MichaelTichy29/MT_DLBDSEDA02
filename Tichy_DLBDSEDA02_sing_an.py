@@ -66,7 +66,7 @@ if first_imp == 1:
 # drop null values
 df_comp = df_comp.dropna(subset=['narrative'])
 # Generate Test Data - for development
-df_test = df_comp.loc[df_comp['Unnamed: 0'] < 163000]
+df_test = df_comp.loc[df_comp['Unnamed: 0'] < 100]
 #print(df_test)
 # For production: 
 #df_test = df_comp
@@ -147,21 +147,24 @@ elif dataset == 5:
     df_test['test'] = df_test['narrative_lem_stem']
     
 # Using Bag of words    
-bow = 1 # not used
+bow = 1 # not used - > 1 reommanded
 
 # start the block for tokenizsation - Must be 1
 use_gensim = 1   
 if use_gensim == 1: 
             
-    # using bigramm or trigramm
+    # using bigramm or trigramm (0,0) = (no, no), (1,0) = (yes,no), (1,1) = (yes, yes)
     use_bigramm = 1
     use_trigramm = 0
         
     # Using  Tfidf 
+    # 0: No, 1: yes
     tif = 0
     
     # use the filter for extreme values in the corpus
-    use_filter_extremes = 1
+    # 0: No, 1: yes
+    use_filter_extremes = 0
+    # real values no_above > no_below
     if use_filter_extremes == 1: 
         no_below = 0.2
         no_above = 10
@@ -169,23 +172,32 @@ if use_gensim == 1:
 
 
 # Using LSA to figure out topics
+# 0: No, 1: yes
 meth_lsa = 0
 
 # Using LDA to figure out topics
+# 0: No, 1: yes
 meth_lda = 1
 
 
 
 # show a vizualisation as a word cloud    
+# 0: No, 1: yes
 vis = 0
 
 # show vizualisation of results
+# 0: No, 1: yes
 vis_res = 0
 
-# number of topics
+#prints the importance of the keywords for the topics.
+# 0: No, 1: yes
+print_top = 1
+
+# number of topics (integer)
 num_topics = 3
 
 # coherence score umass
+# 0: No, 1: yes
 use_umass = 0
 umass_detail = 0
 
@@ -308,9 +320,10 @@ if meth_lda == 1:
                            iterations=iterations, num_topics=num_topics, \
                            passes=passes, eval_every=eval_every)
     
-    for k_top in range(0, num_topics):
-       print(lda_model.print_topics(k_top))
-       print('')
+    if print_top == 1:
+        for k_top in range(0, num_topics):
+           print(lda_model.print_topics(k_top))
+           print('')
 
 
 #####################################
@@ -320,10 +333,11 @@ if meth_lsa == 1:
 
     lsi_model = LsiModel(corpus, id2word=mydictionary, num_topics=num_topics)    
        
-    for k_top in range(0, num_topics):
-        print(lsi_model.print_topics(k_top))
-        print('')
-    
+    if print_top == 1:
+        for k_top in range(0, num_topics):
+            print(lsi_model.print_topics(k_top))
+            print('')
+        
 
 #####################################
 ########   coherence score   ##########
@@ -380,4 +394,4 @@ if vis_res == 1:
     pyLDAvis.enable_notebook()
     pyLDAvis.display(vis)
     pyLDAvis.save_html(vis, 'D:/Michael/IU/5. Semester/Election A - Advanced Data Analyst/Project/vis_of_topic.html')
-    
+ 

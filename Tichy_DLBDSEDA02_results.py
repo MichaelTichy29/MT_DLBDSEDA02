@@ -15,9 +15,26 @@ list_tif = []
 list_numtop = []
 list_coherence = []
 
+###################################
+##### Start: Control  #############
+###################################
 
-meth_lda = 1
-meth_lsa = 0
+
+#Used solver one of them stet as one.
+meth_lda = 0
+meth_lsa = 1
+
+# Parameter for filter in the corpus. -> Real number. no_ab > no_low
+no_low = 0.2 
+no_ab = 10
+
+
+
+###################################
+##### End:  Control  #############
+###################################
+
+
 
 def Auswertung():
     #load data
@@ -30,9 +47,7 @@ def Auswertung():
     #df_test = cleaning_sub(df_comp)
     
     
-    #default:
-    no_low = 0.2
-    no_ab = 10
+    
     
     for dataset in range(5):
         for use_bigramm in range(2):
