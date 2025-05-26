@@ -22,6 +22,11 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
+
+#################################################
+###########  load Dataset     #############
+#################################################
+
 # import the data as csv
 df_comp = pd.read_csv('complaints_processed.csv', encoding = 'cp850')
 
